@@ -1,22 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { userAPI } from "./routes/user.js";
 
 const server = express();
 dotenv.config();
 
+
+server.use(express.json())
+server.use('/api/v1/users', userAPI)
+
 mongoose.set("strictQuery", false);
 
-mongoose.connect(process.env.MONGODB).catch((error) => console.log(error));
-
-// To handle errors after initial connection
-mongoose.connection.on("error", (err) => {
-  console.log("Error occur after initial connection on mongoDb db: " + err);
-});
-
-mongoose.connection.on("connect", () => {
+try {
+  await mongoose.connect(process.env.MONGODB);
   console.log("DB Connection established");
-});
+} catch (err) {
+  console.log(err);
+}
 
 server.listen(
   process.env.PORT,
