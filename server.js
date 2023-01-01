@@ -1,14 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { userAPI } from "./routes/user.js";
+import { userRouter } from "./routes/user.js";
+import { postRouter } from "./routes/post.js";
 
 const server = express();
 dotenv.config();
 
 
 server.use(express.json())
-server.use('/api/v1/users', userAPI)
+server.use('/api/v1/users', userRouter)
+server.use("/api/v1/posts", postRouter);
 
 mongoose.set("strictQuery", false);
 
