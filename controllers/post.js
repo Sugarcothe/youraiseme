@@ -20,3 +20,12 @@ export const getOneFundraiserPost = async (req, res, next) => {
     res.status(400).json(err)
   }
 }
+
+export const getManyFundraiserPost = async (req, res, next) => {
+  try {
+    const post = await Post.find();
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
