@@ -30,7 +30,7 @@ export const updateFundraiserPost = async (req, res, next) => {
 // DELETE FUNDRAISER POST
 export const deleteFundraiserPost = async (req, res, next) => {
   try {
-    await Post.findByIdAndDelete(req.params.id);
+    await Post.findOneAndRemove(req.params.id);
     res.status(200).json("Post deleted succesfully!");
   } catch (err) {
     res.status(400).json(err);
@@ -41,7 +41,7 @@ export const deleteFundraiserPost = async (req, res, next) => {
 export const getOneFundraiserPost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
-    res.status(200).json(post);
+    res.status(200).json(`Post updated succesfully`, post);
   } catch (err) {
     res.status(400).json(err);
   }
