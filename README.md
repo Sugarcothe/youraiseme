@@ -6,9 +6,7 @@ A fundraising system, that allows users to raise money for any course, and then 
 
 ```
 git clone https://github.com/Sugarcothe/youraiseme
-
 npm install or yarn add
-
 ```
 
 ## **Environmental Variables :**
