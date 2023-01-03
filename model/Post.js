@@ -11,7 +11,12 @@ export const postsSchema = new mongoose.Schema(
       max: 2500,
       required: true,
     },
-    amount: {
+    targetAmount: {
+      type: Number,
+      required: true,
+      timestamps: true,
+    },
+    fundRaised: {
       type: Number,
       required: true,
       timestamps: true,
