@@ -15,25 +15,33 @@ export const createFundraiserPost = async (req, res, next) => {
 
 // UPDATE FUNDRAISER POST
 export const updateFundraiserPost = async (req, res, next) => {
-  try {
-    const post = await Post.findOneAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.status(200).json(post);
-  } catch (err) {
-    res.status(400).json(err);
+  if (req.params.id === req.user.id) {
+    try {
+      const post = await Post.findOneAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true }
+      );
+      res.status(200).json(post);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  } else {
+    res.status(400).json("You cannot update others post");
   }
 };
 
 // DELETE FUNDRAISER POST
 export const deleteFundraiserPost = async (req, res, next) => {
-  try {
-    await Post.findOneAndRemove(req.params.id);
-    res.status(200).json("Post deleted succesfully!");
-  } catch (err) {
-    res.status(400).json(err);
+  if (req.params.id === req.user.id) {
+    try {
+      await Post.findOneAndRemove(req.params.id);
+      res.status(200).json("Post deleted succesfully!");
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  }else{
+    res.status(400).json("You cannot delete others post");
   }
 };
 

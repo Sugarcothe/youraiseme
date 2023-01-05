@@ -12,8 +12,8 @@ export const postRouter = express.Router();
 
 postRouter.post(
   "/createFundraiser",
-  verifyUser,
   verifyToken,
+  verifyUser,
   createFundraiserPost
 );
 postRouter.get("/getOneFundraiser/:id", getOneFundraiserPost);
