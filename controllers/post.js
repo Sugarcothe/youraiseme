@@ -3,9 +3,7 @@ import { Post } from "../model/Post.js";
 // CREATE FUNDRASIER POST
 export const createFundraiserPost = async (req, res, next) => {
   try {
-    const post = new Post({
-      ...req.body,
-    });
+    const post = new Post({ userId: req.user.id, ...req.body });
     await post.save();
     res.status(200).json("FundRaiser post created");
   } catch (err) {
@@ -69,7 +67,7 @@ export const getManyFundraiserPost = async (req, res, next) => {
 export const donation = async (req, res, next) => {
   try {
     const post = await Post.findByIdAndUpdate(req.user.id, {
-      $push: { fundRaised: req.params.id},
+      $push: { fundRaised: req.params.id },
     });
   } catch (err) {
     res.status(400).json(err);

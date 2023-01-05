@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 export const postsSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       max: 150,
