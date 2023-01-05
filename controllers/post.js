@@ -13,7 +13,7 @@ export const createFundraiserPost = async (req, res, next) => {
 
 // UPDATE FUNDRAISER POST
 export const updateFundraiserPost = async (req, res, next) => {
-  if (req.params.id === req.user.id) {
+  if (req.user.id === Post.userId) {
     try {
       const post = await Post.findOneAndUpdate(
         req.params.id,
