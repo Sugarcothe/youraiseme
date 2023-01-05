@@ -40,7 +40,7 @@ export const deleteFundraiserPost = async (req, res, next) => {
     } catch (err) {
       res.status(400).json(err);
     }
-  }else{
+  } else {
     res.status(400).json("You cannot delete others post");
   }
 };
@@ -60,6 +60,17 @@ export const getManyFundraiserPost = async (req, res, next) => {
   try {
     const post = await Post.find();
     res.status(200).json(post);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+// DONATION
+export const donation = async (req, res, next) => {
+  try {
+    const post = await Post.findByIdAndUpdate(req.user.id, {
+      $push: { fundRaised: req.params.id},
+    });
   } catch (err) {
     res.status(400).json(err);
   }
