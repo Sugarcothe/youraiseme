@@ -53,10 +53,21 @@ export const getOneFundraiserPost = async (req, res, next) => {
   }
 };
 
-// GET MANY FUNDRAISER POST
+// SEARCH FUNDRAISER POST
+export const searchFundraiserPost = async (req, res, next) => {
+  const query = req.query.q;
+  try {
+    await Video.find({
+      title: { $regex: query, $options: i },
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+// GET MANY RANDOM FUNDRAISER POST
 export const getManyFundraiserPost = async (req, res, next) => {
   try {
-    const post = await Post.find();
+    const post = await Post.aggregate([{ $sample: { size: 20 } }]);
     res.status(200).json(post);
   } catch (err) {
     res.status(400).json(err);

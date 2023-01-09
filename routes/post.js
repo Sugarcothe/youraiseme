@@ -5,6 +5,7 @@ import {
   getManyFundraiserPost,
   updateFundraiserPost,
   deleteFundraiserPost,
+  donation
 } from "../controllers/post.js";
 import { verifyToken, verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 
@@ -30,3 +31,5 @@ postRouter.delete(
   verifyUser,
   deleteFundraiserPost
 );
+
+postRouter.put("/donate", donation)
